@@ -15,6 +15,9 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.revature.comparison.NameComparator;
+import com.revature.comparison.Person;
+
 public class Driver {
 
 	public static void main(String[] args) {
@@ -192,5 +195,25 @@ public class Driver {
 		convertedVarArgs.forEach(System.out::println);
 		
 		// Explore the Comparable & Comparator interfaces
+		
+		
+		
+		List<Person> people = new ArrayList<>();
+		
+		people.add(new Person(25, "Sam"));
+		people.add(new Person(4, "Sally"));
+		people.add(new Person(56, "Gertrude"));
+		people.add(new Person(16, "Larry"));
+		people.add(new Person(37, "Sally"));
+		
+		System.out.println(people);
+		
+		Collections.sort(people);
+		
+		System.out.println(people);
+		
+		Collections.sort(people, new NameComparator()); // You do have to instantiate the Comparator class
+		
+		System.out.println(people);
 	}
 }
