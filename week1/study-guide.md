@@ -1,0 +1,254 @@
+# Week 1 Study Guide
+Topics Covered: Java
+
+Review the material covered from the week, which is listed out below.
+
+Leverage the "How to do well in QC" Document that is pinned to the Training channel on Slack.
+
+In particular, be able to answer "Tell me about your experience with X?", where X is any of the topics listed below.
+
+Be able to provide overall reasons `Why` certain features are available. Such as what problems they solve.
+
+## Topics
+- Intro to Java
+  - High Level (What is Java?) (What are the benefits of Java?) (What is OOP?)
+  - Benefits of Java
+    - Write Once, Run Anywhere (Platform-Independent)
+    - Automatic Memory Management
+    - C-based (therefore easy to learn)
+    - Rich Open Source Community
+    - Extensive Runtime Library
+  - Characteristics
+    - Compiled language
+    - Strongly Typed
+- JVM, JRE, JDK
+  - JVM: Java Virtual Machine
+  - JRE: Java Runtime Environment
+  - JDK: Java Development Kit
+  - JDK contains JRE + Developer tools like the Compiler
+  - JRE contains JVM + Supporting libraries
+  - Java ByteCode
+    - Compiles to Java ByteCode
+    - JVM acts as an interpreter for the ByteCode
+    - JVM is called a "Just-In-Time Compiler"
+- Primitive Data Types
+  - There are 8
+  - int (4 bytes)
+  - byte (1 byte)
+  - boolean (JVM-Dependent size)
+  - short (2 bytes)
+  - char (2 bytes)
+  - long (8 bytes)
+  - float (4 bytes)
+  - double (8 bytes)
+- Access Modifiers
+  - Access Modifiers
+    - private
+    - public
+    - default
+    - protected
+  - Non Access Modifiers
+    - static
+    - final
+    - abstract
+    - synchronized
+    - volatile
+    - strictfp
+    - native
+    - transient
+- Scopes
+  - Static
+  - Instance
+  - Method
+  - Block
+- Packages
+  - Import
+  - Static Import
+- Syntax for Main Method
+- Memory Management
+  - Garbage Collector
+  - Stack & Heap
+  - Heap contains String Pool
+- Constructors
+  - Constructor chaining (can use this() or super())
+  - Default Constructor (When do we have it?)
+- Object Class
+  - Methods on Object Class that are inherited
+    - hashCode
+    - equals
+    - toString
+    - clone
+    - wait
+    - notify
+- Strings
+  - Strings are Immutable
+  - String API methods
+  - Leverages the String Pool for String Literals
+- StringBuffer & StringBuilder
+- Control flow Statements
+  - if/else
+  - switch
+  - for
+  - enhanced for (AKA for-each loop)
+  - while
+  - do-while
+- Operators
+  - Increment & Decrement
+  - Pre/Post Increment/Decrement
+  - Ternary Operator (? mark operator)
+  - Logical Operators
+    - OR - ||
+    - AND - &&
+    - Short-Circuiting
+- Wrapper Classes
+  - Object versions of the primitive datatypes
+  - Immutable
+  - Support automatic autoboxing & auto-unboxing
+  - autoboxing = Converting primitive into Wrapper
+  - auto-unboxing = Converting Wrapper into primitive
+- Arrays
+  - Fixed length
+  - Have indexes
+- Varargs
+- Annotations
+  - @Override
+  - @FunctionalInterface
+  - Provide metadata to whatever is being annotated
+- 4 Pillars of OOP (A - PIE)
+  - Abstraction
+    - Abstract Classes and Interfaces
+  - Polymorphism
+    - Method Overloading/Overriding & Covariance
+  - Inheritance
+    - IS-A relationship
+  - Encapsulation
+- Exceptions & Exception Handling
+  - Keywords
+    - throw
+    - throws
+    - try
+    - catch
+    - finally
+  - Class Heirarchy
+    - Throwable
+      - Exception
+        - RuntimeException
+          - ArithmeticException
+          - NullPointerException
+          - IllegalStateException
+          - ClassCastException
+        - IOException
+        - ClassNotFoundException
+      - Error
+        - StackOverflowError
+        - OutOfMemoryError
+  - Checked/Unchecked Exceptions
+    - What differentiates them
+  - When do Checked Exceptions Occur?
+  - When do Compile-time Exceptions occur?
+    - Answer: At Runtime
+  - Create Custom Exceptions
+- JUnit
+  - Unit Testing Library
+  - Specifically different from manual testing
+  - Annotations
+    - @Test
+    - @Before
+    - @After
+    - @BeforeClass
+    - @AfterClass
+    - @Ignore
+  - Assert Methods
+    - Static methods to assert certain expectations
+    - assertTrue
+    - assertEquals
+    - assertArrayEquals
+    - assertNotEquals
+  - Test Driven Development (TDD)
+    - Write tests FIRST
+    - Then create application code to make them pass
+    - You may even create class names and method names off the top of your head
+      when writing tests, and then create application code to fix the syntax errors
+- File I/O
+  - FileInput/OutputStreams
+    - Process 1 byte at a time
+  - FileReader/Writers
+    - Process 1 character (2 bytes) at a time
+  - BufferedReader/Writers
+    - Process entire Strings at a time
+  - Scanner
+    - Console input when using System.in
+- Serialization
+  - Uses the Serializable Marker interface
+- Collections API
+  - Collections Heirarchy
+  - Iterable
+    - Collection
+      - Set
+        - HashSet
+        - TreeSet
+      - List
+        - ArrayList
+        - LinkedList
+      - Queue
+        - LinkedList
+        - PriorityQueue
+  - Map (separate from the entire Collection Heirarchy)
+    - HashMap
+    - TreeMap
+  - Understand the characteristics of each data structure
+  - Leverage Generics
+    - The `<Integer>` or `<T>` syntax
+  - Comparable & Comparator interfaces
+- Reflections API
+  - API for Java to analyze itself at runtime
+  - Has classes/interfaces to perform this self-analysis
+    - Constructor
+    - Field
+    - Class
+- Concurrency
+  - Idea of multiple threads performing parallel processing
+  - Thread Class
+  - Runnable Interface
+  - LifeCycle of a Thread
+    - Leverages wait() and notify() methods of Object class
+  - Race Conditions
+  - Deadlock & Livelock
+- Design Patterns
+  - POJO (Plain Old Java Object)/Java Bean
+  - Singleton
+  - Factory
+  - (Optional) Builder
+- Log4J
+  - The importance of Logging
+  - Logging Levels
+- Maven
+  - Dependency Manager and Build Automation tool
+  - Maven Repositories
+    - Online repositories of dependencies
+  - Maven Lifecycle
+    - Build
+      - The important one
+    - Site
+    - Clean
+  - Maven projects have a `pom.xml` file
+    - Stands for Project Object Model
+    - It is how Maven represents your project
+  - mvn command-line utility
+    - Each maven lifecycle phase is a command
+- Advanced Java features
+  - try-with-resources block
+  - Diamond Operator
+  - Date & Time API
+  - Stream API
+    - Functional Programming
+    - Lambdas (Anonymous Functions)
+      - Functional Interfaces
+- Git
+  - Version Control Software
+  - Represents full history of timelines of codebase changes
+  - Has concepts such as branches, pull requests, remotes
+  - Best practices
+    - small-scale: lowercase branch names
+    - large-scale: Pull before you push
+      - Commit & push frequently to avoid large merge conflicts
