@@ -76,22 +76,25 @@ Describes the numerical relationship between 2 tables. There are 3 categories:
 
 Join tables are a separate, independent table. It consists of 2 columns, both of which are foreign keys back to the original source tables. Both of these columns will be non-unique foreign keys, to effectively structure this as two 1 to many relationships back to back. Neither source table will contain any foreign keys to the other table in regards to this relationship
 
-Table1 PKs
-1
-2
-3
-4
+Table1 PK       |
+:---------------|
+1               |
+2               |
+3               |
+4               |
 
-Table2 PKs
-1
-2
+Table2 PK       |
+:---------------|
+1               |
+2               |
 
-Join Table
-1 1
-1 2
-2 1
-4 2
-3 1
+Join Table FK1  |Join Table FK2  |
+:---------------|----------------|
+1               |1               |
+1               |2               |
+2               |1               |
+4               |2               |
+3               |1               |
 
 Example join table name: users_accounts_jt
 The primary key of the join table is commonly structured (but not always) as a composite key over both columns
@@ -124,3 +127,80 @@ Levels of Normalization
 - There are always more Normalization levels
 - There are complicated nuanced levels that go on even beyond 6NF for example
 - However, they out of scope for this training at least
+
+## Transactions
+
+A transaction is a unit of work performed against a database. It is the propagation of one or more changes to the database. Generally used with UPDATE, DELETE, and INSERT operations.
+
+A transaction would be used if you want to group multiple operations together and execute them all at once.
+
+### ACID (Properties of Transactions)
+
+A. Atomicity
+  - The operation occurs successfully or not at all
+  - If it fails, the transaction will be aborted and changes will be rolled back
+C. Consistency
+  - Ensure that the database properly changes state upon a successfully commit transaction
+  - No transaction should have any adverse effect on the data residing in the database
+    - Referential Integrity must be maintained
+I. Isolation
+  - Enables transactions to operate independently of each other
+  - Provides the ability to support parallel processing for performance benefits
+  - Some issues could potentially arise due to this however
+D. Durability
+  - Ensures that the result or effect of a committed transaction persists in case of system failure
+  - There is no delay between a transaction completing and the state being permanently persisted
+
+### Transaction Problems
+
+There are some issues that can arise while following the Isolation property of transactions. We try to handle them concurrently, because it is faster. But what might happen if one transaction reads data from another transaction, but then the second transaction gets rolled back? We have retrieved data that should not have existed.
+
+- Dirty Read
+  - When a transactions reads data that has been added by a different transaction that has yet to be committed
+- Non-Repeatable Read
+  - When a transaction re-reads data that it has previously read and finds another committed transaction has modified
+- Phantom Read
+  - When a transaction re-runs a query to find that the number of records has changed
+
+### Transaction Isolation Levels
+
+- The degree to which two transactions will interact with each other over the same data
+- As our application becomes more complex, we must account for transactions that may occur at the same time
+- The higher the Isolation Level, the more careful the system is about avoiding conflicts, but the locking overhead can increase as concurrency decreases
+
+Isolation Level |    Dirty Read    | Non-Repeatable Read |   Phantom Read   |
+:---------------|------------------|---------------------|------------------|
+Read Uncommitted|:heavy_check_mark:|:heavy_check_mark:   |:heavy_check_mark:|
+Read Committed  |                  |:heavy_check_mark:   |:heavy_check_mark:|
+Repeatable Read |                  |                     |:heavy_check_mark:|
+Serializable    |                  |                     |                  |
+
+By default, PostgreSQL is set ot Read Committed
+
+## Database Joins
+
+- Operations that allow us bring together data from multiple tables
+- Particularly useful in describing many to many relationships
+- There are several types
+  - Inner Join
+    - Only show records with the compared value existing in both tables
+  - Full Outer Join
+    - Fully join all tables together, substituting null values where data is absent
+  - Left/Right Join
+    - All data from the Left/Right table paired with the other and subituting nulls where appropriate
+  - Cross Join
+    - Cartesian Cross Product on records from both tables, so you get a list of permutations from the tables
+    - This can generate a LOT of data in response
+  - Self Join
+    - Any join that operates on only 1 table
+    - Not truly its own category
+
+We will obtain a single result with columns selected from both tables, and records will be joined overlapping on one value from a single column.
+
+Most particularly, this overlapping column will be our foreign key to the other table's primary key.
+Some SQL Dialects enforce that Joins can only be performed through foreign keys, but not all dialects do.
+
+```SQL
+SELECT <columns> FROM <left> <JOIN TYPE> JOIN <right>
+  ON <left.column> = <right.column>;
+```
