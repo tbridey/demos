@@ -3,6 +3,7 @@ package com.revature.repositories;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
@@ -82,21 +83,20 @@ public class UserDAO implements IUserDAO {
 //			// What if your username was "; DROP TABLE users CASCADE;"
 //			// This problem is called SQL Injection
 			
-			String sql = "INSERT INTO project0.users (username, password, role) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO project0.users (username, password, role) VALUES (?, ?, ?) RETURNING project0.users.id";
 			
-			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stmt = conn.prepareStatement(sql);
 			
 			stmt.setString(1, u.getUsername()); // PreparedStatement will prevent any content from
 			// being executed as SQL
 			stmt.setString(2, u.getPassword());
 			stmt.setObject(3, u.getRole(), Types.OTHER);
 			
-			if(stmt.execute()) {
-				ResultSet rs = stmt.getGeneratedKeys();
-				
+			ResultSet rs;
+			if((rs = stmt.executeQuery()) != null) {
 				rs.next();
 				
-				int id = (int) rs.getLong(1);
+				int id = rs.getInt(1);
 				
 				return id;
 			}
@@ -119,5 +119,11 @@ public class UserDAO implements IUserDAO {
 	public boolean delete(int userId) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public User findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

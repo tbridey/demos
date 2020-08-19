@@ -2,6 +2,8 @@ package com.revature.models;
 
 import java.util.Objects;
 
+import com.revature.exceptions.MissingAccountOwnerException;
+
 public class Account {
 
 	private int id;
@@ -16,6 +18,9 @@ public class Account {
 		super();
 		this.id = id;
 		this.balance = balance;
+		if(owner == null) {
+			throw new MissingAccountOwnerException();
+		}
 		this.owner = owner;
 	}
 

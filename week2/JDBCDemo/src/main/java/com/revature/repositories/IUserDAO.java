@@ -11,4 +11,5 @@ public interface IUserDAO {
 	public int insert(User u);
 	public boolean update(User u);
 	public boolean delete(int userId);
+	public User findById(int id);
 }
