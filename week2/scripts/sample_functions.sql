@@ -1,0 +1,8 @@
+--CREATE PROCEDURE users_before_year(year INTEGER) RETURNS SETOF employee
+--AS
+--$$
+--	SELECT * FROM employee WHERE EXTRACT(YEAR FROM "HireDate") < year;
+--$$ LANGUAGE SQL;
+--
+--SELECT * FROM users_before_year(2021);
+-- SQLite does not support functions/procedures
