@@ -88,7 +88,7 @@ $$ LANGUAGE plpgsql;
 
 SELECT withdraw(1, 5);
 
-SELECT transfer_funds(1, 1, 3);
+SELECT transfer_funds(1, 2, 30);
 
 --ALTER TABLE project0.users
 --	ADD COLUMN hire_date DATE NOT NULL DEFAULT current_date;

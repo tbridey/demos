@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -107,5 +108,97 @@ public class AccountDAO implements IAccountDAO {
 	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean transfer(int source_account, int target_account, double amount) {
+		String sql = "{ call transfer(?, ?, ?) }";
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			CallableStatement stmt = conn.prepareCall(sql);
+			
+			stmt.setInt(1, source_account);
+			stmt.setInt(2, target_account);
+			stmt.setDouble(3, amount);
+			
+			stmt.execute();
+			
+			return true;
+		} catch (SQLException e) { }
+	
+		return false;
+	}
+	
+	@Override
+	public boolean transfer2(Account source_account, Account target_account, double amount) {
+		
+		if(amount > source_account.getBalance()) {
+			return false;
+		}
+		
+		if(amount < 0) {
+			return false;
+		}
+		
+		Connection conn = ConnectionUtil.getConnection();
+
+		try {
+			
+			conn.setAutoCommit(false);
+			
+			String sql_withdraw = "UPDATE project0.accounts SET balance = ? WHERE id = ?";
+			
+			PreparedStatement stmt_withdraw = conn.prepareStatement(sql_withdraw);
+			
+			stmt_withdraw.setDouble(1, source_account.getBalance() - amount);
+			stmt_withdraw.setInt(2, source_account.getId());
+			
+			if(stmt_withdraw.executeUpdate() == 1) {
+				String sql_deposit = "UPDATE project0.accounts SET balance = ? WHERE id = ?";
+				
+				PreparedStatement stmt_deposit = conn.prepareStatement(sql_deposit);
+				
+				stmt_deposit.setDouble(1, target_account.getBalance() + amount);
+				stmt_deposit.setInt(2, target_account.getId());
+				
+				if(stmt_deposit.executeUpdate() != 1) {
+					System.out.println("DEPOSIT FAILED IN TRANSFER");
+					conn.rollback();
+				}
+				
+				conn.commit();
+				return true;
+			} else {
+				System.out.println("WITHDRAW FAILED IN TRANSFER");
+				conn.rollback();
+			}
+			
+		} catch(SQLException e) { 
+			System.out.println("AN EXCEPTION OCCURRED");
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public String toUppercase(String lowercase) {
+		
+		String sql = "{ ? = call upper(?) }";
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			
+			CallableStatement stmt = conn.prepareCall(sql);
+			
+			stmt.registerOutParameter(1, Types.VARCHAR);
+			
+			stmt.setString(2, lowercase);
+			
+			stmt.execute();
+			
+			return stmt.getString(1);
+		} catch(SQLException e) { }
+		
+		return null;
 	}
 }

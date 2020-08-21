@@ -90,7 +90,7 @@ public class UserDAO implements IUserDAO {
 			stmt.setString(1, u.getUsername()); // PreparedStatement will prevent any content from
 			// being executed as SQL
 			stmt.setString(2, u.getPassword());
-			stmt.setObject(3, u.getRole(), Types.OTHER);
+			stmt.setObject(3, u.getRole());
 			
 			ResultSet rs;
 			if((rs = stmt.executeQuery()) != null) {

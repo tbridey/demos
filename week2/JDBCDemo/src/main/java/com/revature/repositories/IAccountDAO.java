@@ -15,4 +15,10 @@ public interface IAccountDAO {
 	public boolean update(Account a);
 	
 	public boolean delete(int id);
+
+	public boolean transfer(int source_account, int target_account, double amount);
+
+	boolean transfer2(Account source_account, Account target_account, double amount);
+
+	String toUppercase(String lowercase);
 }
