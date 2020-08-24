@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>My Custom Webpage</title>
+  </head>
+  <body>
+    <nav id="navbar" class="navbar bg-danger">
+      <a class="navbar-brand" href="https://google.com">Google</a>
+    </nav>
+    <script>
+      console.log("Hello World!");
+      var navbarElement = document.getElementById("navbar");
+
+      setTimeout( () => {
+        navbarElement.classList.remove("bg-danger");
+        navbarElement.classList.add("bg-light");
+      }, 5000);
+
+      var anchor = document.getElementsByTagName("a")[0];
+      anchor.innerHTML = 'Something<script>console.log("Hello there")';
+    </script>
+
+
+    <span style="background-color: grey;">Some random text</span>
+    <div style="background-color: grey;">Some random text</div>
+    <div class="container">
+      <div class="jumbotron">
+        <h1>Hello World!</h1>
+        <p class="lead">Welcome to my Bootstrapped website &#128512;</p>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>This is my first paragraph!</p>
+        </div>
+      </div>
+
+      <div class="row">
+      </div>
+
+      <div class="row">
+        <div class="col-8">
+        </div>
+        <div class="col-4">
+          <table id="table" class="table table-bordered table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Col1</th>
+                <th>Col2</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cell1</td>
+                <td>Cell2</td>
+              </tr>
+              <tr>
+                <td>Cell3</td>
+                <td>Cell4</td>
+              </tr>
+            </tbody>
+          </table>
+          <script>
+            var tableElement = document.getElementById("table");
+            setTimeout( () => {
+              tableElement.classList.remove("table-bordered");
+            }, 5000);
+          </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
