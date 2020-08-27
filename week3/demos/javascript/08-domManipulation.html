@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM Manipulation</title>
+</head>
+<body>
+  <h1>DOM Manipulation</h1>
+
+  <p>
+    DOM stands for Document Object Model. It is a representation of this entire HTML document.
+    It has all of the elements in the webpage. It is not unreasonable to think of it like a family
+    tree, and we even refer to elements as "parent", "child", or "sibling".
+
+    There are JavaScript functions that allow us to modify or in other ways
+    affect the html document. This is collectively referred to as DOM Manipulation.
+
+    There are different ways of accessing elements in the DOM:
+    <ul>
+      <li>id (using the getElementById function)</li>
+      <li>class (using the getElementsByClassName function)</li>
+      <li>name (using the getElementsByName function)</li>
+      <li>tag (using the getElementsByTagName function)</li>
+      <li>etc</li>
+    </ul>
+  </p>
+
+  <p>Example</p>
+
+  <p id="exampleParagraph">JavaScript is weird....But we all love it.</p>
+  <script>
+    // We need to make sure that our script tag is BELOW the elements we want to access
+    // Because if it isn't, those elements will not exist yet, and so we won't be able
+    // to perform any DOM manipulation on them
+
+    // Sometimes, it is common to declare script tags at the top of an html document,
+    // but these just define global functions to be used elsewhere
+    // They aren't doing any DOM manipulation
+
+    let paragraph = document.getElementById("exampleParagraph");
+
+    console.log(paragraph);
+
+    setTimeout( () => {
+      paragraph.innerHTML = "JavaScript is awesome!";
+    }, 3000);
+  </script>
+
+  <p class="revature">The projects are hard!</p>
+  <p class="revature">But we will get through them.</p>
+  <script>
+    let revatures = document.getElementsByClassName("revature");
+
+    console.log(revatures);
+
+    console.log(revatures[0]);
+    console.log(revatures[1]);
+
+    setTimeout( () => {
+      revatures[0].style.color = 'orange';
+    }, 3000);
+  </script>
+
+  <div id="parent">
+    <p>This is the paragraph within the parent div</p>
+  </div>
+  <script>
+    let parent = document.getElementById("parent");
+
+    let header = document.createElement("h1");
+    header.innerHTML = "Just Kidding!";
+
+    header.style.color = "red";
+    header.setAttribute("id", "jk");
+    header.setAttribute("style", "color: red; background-color: rebeccapurple");
+
+    parent.appendChild(header);
+
+    setTimeout( () => {
+      parent.removeChild(header);
+      // Telling the parent to remove its own child
+    }, 4000);
+  </script>
+
+  <h2>
+    We can also execute JavaScript in response to many different events that occur on our page
+  </h2>
+
+  <pre>
+    There are many events that we can respond to:
+
+    - onclick
+    - onload
+    - onmouseover
+    - onkeydown & onkeyup
+    - MANY MANY MORE
+  </pre>
+
+  <button id="button" onclick="startGrowing()">This is our button</button>
+  <script>
+    let button = document.getElementById("button");
+    let flag = false;
+    function someFunc() {
+      flag = !flag;
+      if(flag) {
+        button.innerHTML = "CHANGED";
+        button.setAttribute("style", "background-color: green; color: black; border: 3px solid black");
+      } else {
+        button.innerHTML = "This is our button";
+        button.setAttribute("style", "");
+      }
+    }
+
+    function startGrowing(time) {
+      setInterval(grow, 500, time);
+    }
+
+    function grow(time) {
+      if(!flag) {
+        flag = !flag;
+        button.setAttribute("style", "height: 30px; width: 120px");
+      }
+
+      if(time) {
+        button.innerHTML = time;
+      }
+
+      let currentHeight = +button.style.height.replace("px", "");
+      let currentWidth = +button.style.width.replace("px", "");
+      button.setAttribute("style", `height: ${currentHeight + 20}px; width: ${currentWidth + 20}px`);
+    }
+  </script>
+
+  <p>Alternatively, we can assign Event Listeners purely through JavaScript</p>
+
+  <script>
+    // Generally speaking, we will use arrow functions much more often
+    // These arrow functions for events can accept a single parameter, which would be the event object
+    // button.addEventListener("click", startGrowing);
+
+    button.addEventListener("click", (event) => {
+      let currentTime = event.timeStamp;
+
+      startGrowing(currentTime);
+    });
+  </script>
+</body>
+</html>
