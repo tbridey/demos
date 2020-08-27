@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My Webpage from a Servlet</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>My custom webpage</h1>
+		<p>This was sent back as a full html file from our Servlet</p>
+		<script>
+			console.log("Hello there in the console!");
+		</script>
+		
+		<!-- When you submit requests like this, you're not in JavaScript to process the response -->
+		<!-- So this is better used when you expect to get HTML in response -->
+		<form action="/second" method="GET">
+			<input type="text">
+			<button type="submit">SEND</button>
+		</form>
+		
+		<script>
+			async function func() {
+				let response = await fetch("http://localhost:8080/ServletDemo/second");
+				
+				let data = await response.json();
+				
+				console.log(data);
+			}
+			
+			func();
+		</script>
+	</body>
+</html>
