@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My Webpage from a Servlet</title>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1 id="welcome">Welcome</h1>
+
+		<button onclick="goback()">Go Back</button>
+		<script>
+			function goback() {
+				window.history.back();
+			}
+
+			// Retrieving information from the session
+			let currentUser = sessionStorage.getItem("currentUser");
+
+			// If they are not logged in, goback immediately
+			if(!currentUser) {
+				goback();
+			}
+
+			let welcome = document.getElementById("welcome");
+
+			welcome.innerHTML += " " + currentUser;
+		</script>
+
+	</body>
+</html>
