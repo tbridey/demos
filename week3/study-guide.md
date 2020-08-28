@@ -1,0 +1,235 @@
+# Week 1 Study Guide
+Topics Covered: HTML, CSS, Bootstrap, JavaScript, Servlets
+
+Review the material covered from the week, which is listed out below.
+
+Leverage the "How to do well in QC" Document that is pinned to the Training channel on Slack.
+
+In particular, be able to answer "Tell me about your experience with X?", where X is any of the topics listed below.
+
+Be able to provide overall reasons `Why` certain features are available. Such as what problems they solve.
+
+Additionally, all of the notes in the [Monday topics](notes/monday-topics.md) are also included.
+
+## Topics
+- HTML = HyperText "Markup Language"
+  - Fundamentals
+    - DOCTYPE
+    - Elements
+      - Tables
+      - Lists
+      - Forms
+    - Attributes
+  - Semantic vs Non-Semantic Elements
+  - Event Propagation
+    - First Capturing
+    - Then Bubbling
+- CSS = Cascading Style Sheets
+  - Fundamentals
+    - Selectors and Declarations
+        - Element Selector
+        - Id Selector
+        - Class Selector
+        - Universal Selector
+        - Attribute selectors
+        - Grouping Selector
+        - Child and descendent selectors
+        - General and adjacent sibling selectors
+        - Pseudo-element and pseudo-class selectors
+  - CSS Box Model
+    - Margin
+    - Border
+    - Padding
+    - Content
+- Ways to Include CSS
+  - Inline
+  - Internal
+  - External
+- Bootstrap
+  - Bootstrap Grid System
+    - container
+    - row
+    - col
+  - Know some classes within a few different categories (like 2 or 3 each)
+    - Color
+    - Table
+    - Navbar
+    - Form
+- JavaScript
+  - Fundamentals
+    - Loosely/Weakly Typed (don't specify variable types)
+    - Dynamically Typed (variables can change types)
+    - Scopes
+      - Global
+      - Functional
+      - With ES6
+        - Block (only for let and const)
+    - Types
+      - number
+      - string
+      - boolean
+      - object
+      - undefined
+      - null
+      - function
+    - Truthy/Falsey
+      - Every type can be coerced into a boolean
+      - Falsey Values
+        - null
+        - undefined
+        - empty string
+        - NaN
+        - zero
+        - false
+  - Ways to Include JavaScript
+    - Script tag
+      - src attribute
+  - Closures
+    - A means to encapsulate scopes
+      - Particulary you encapsulate an outer scope by returning an inner function
+  - Functions are first class objects
+  - Prototypal Inheritance vs Classical Inheritance
+    - javaScript now has both with ES5
+    - `__proto__` property
+    - Also now there is a `Prototype` property that is newer
+  - DOM Manipulation
+    - Select elements with document object
+      - getElementById
+      - getElementsByClassName
+      - getElementsByTagName
+      - getElementsByName
+      - etc
+      - These functions can be invoked sequentially to become more specific
+    - innerHTML property
+    - other attributes
+  - AJAX = Asynchronous JavaScript And XML
+    - An API for sending HTTP Requests
+    - HTTP Requests are an asynchronous process
+    - Uses XMLHttpRequest objects
+      - readyStates
+        - 0: UNOPENED
+        - 1: SENT
+        - 2: HEADERS_RECEIVED
+        - 3: LOADING
+        - 4: DONE
+      - onreadystatechange
+        - callback that is invoked when the readyState changes
+    - Fetch API
+      - Uses Promises
+      - A little bit nicer syntax than AJAX
+    - Async/Await keywords
+      - Introduced in ES7
+      - Allow you to await a promise
+      - Very clean syntactically
+  - Template Literals
+    - Strings declared with the grave key
+    - Support String interpolation
+  - Arrow Functions
+    - JavaScript's anonymous functions
+  - Event Listeners
+    - We can attach Event Listeners either through pure HTML with an attribute similar to "onclick"
+    - We can also create Event Listeners directly in JavaScript
+      - addEventListener() method
+        - takes a callback function, and a boolean to determine the phase
+        - false => bubbling (default)
+        - true => capturing
+- [Servlets](notes/servlets/servlets.md)
+  - An API to handle HTTP Requests
+  - Servlet Heirarchy
+    - Servlet Interface
+      - GenericServlet Abstract Class
+        - HttpServlet Abstract Class
+          - CustomServlet classes
+  - Servlet LifeCycle
+    - init() method called once
+      - `load-on-startup` tag to load before 1st Request
+    - service() method called many times
+    - destroy() method called once
+  - ServletConfig vs ServletContext
+    - ServletContext is shared with all Servlets
+      - `context-param` tag
+    - ServletConfig is specific to 1 Servlet
+      - `init-param` tag
+  - forward vs sendRedirect
+    - forward is server-side
+      - Client will not notice the forward happen at all
+      - There is 1 Request/Response
+      - `req.getRequestDispatcher().forward()`
+    - sendRedirect is client-side
+      - Client will see the webpage redirect
+      - There are 2 Request/Responses
+        - The first Response has a 3XX status code
+      - `resp.sendRedirect()`
+  - Configuring Servlets
+    - Use `@WebServlet` annotation or configure in `web.xml`
+      - Using the `servlet` and `servlet-mapping` tags
+        - `servlet-name`, `servlet-class`, `url-pattern` tags
+  - Processing forms
+    - Form Data is accessible via `req.getParameter()`
+    - If the Form was submitted as GET
+      - Data will be visible in URL
+    - If the Form was submitted as POST
+      - Data will not be visible in URL
+  - Process Body of the Request
+    - `req.getReader()`
+  - Writing to body of the Response
+    - `resp.getWriter()`
+    - Uses PrintWriter type
+  - Can provide custom error pages
+    - Using `error-page` tag in `web.xml`
+  - Can create filters
+    - Using `filter` and `filter-mapping` tags in `web.xml`
+      - `filter-name`, `filter-class`, and `url-pattern` tags
+- General Web Architecture
+  - Tomcat is our Web Server
+    - Also known as a Servlet Container or Web Container
+    - Tomcat will create a new thread for every Request
+  - HTTP [Request/Response Cycle](notes/servlets/request-response.md)
+    - `web.xml` is called the Deployment Descriptor
+  - [Design Patterns](notes/servlets/design-patterns.md)
+    - Front Controller
+      - Only 1 Servlet
+    - MVC = Model - View - Controller
+  - HTTP = HyperText Transfer Protocol
+    - Request
+      - URL
+      - Request Parameters
+      - Request Headers
+      - Request Body
+      - HTTP Version
+      - HTTP Method
+        - GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD, TRACE, INFO, etc
+    - Response
+      - Response Headers
+      - Response Body
+      - HTTP Version
+      - Status Code (Know some examples)
+        - 1XX: Informational
+        - 2XX: Success
+          - 200 OK
+          - 201 Accepted
+          - 204 No Content
+        - 3XX: Redirections
+          - 300 Redirected
+        - 4XX: Client-Side Errors
+          - 400 Bad Request
+          - 401 Unauthorized
+          - 404 Not Found
+          - 418 I am a Teapot
+        - 5XX: Server-Side Errors
+          - 500 Internal Server Error
+- [REST](notes/servlets/rest.md) = REpresentational State Transfer
+  - Considers data to be "resources"
+  - We use the Jackson-Databind dependency in Java
+    - Convert back and forth between Java objects and JSON
+  - The API focuses on manipulating these resources
+  - Constraints of REST
+    - Cacheable
+    - Stateless
+    - Layered Architecture
+    - Client-Server Relationship
+    - Uniform Interface
+    - (Optional) Code on Demand
+  - REST often uses Path Variables
+    - Embedding useful information about the request in the URL
+      - Such as ID or username
