@@ -1,8 +1,6 @@
 package com.revature.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,7 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Employee;
+import com.revature.models.Role;
+import com.revature.services.AuthorizationService;
 import com.revature.services.EmployeeService;
+import com.revature.util.RequestUtil;
 import com.revature.util.ResponseUtil;
 
 /*
@@ -21,6 +22,7 @@ public class EmployeeController {
 	
 	private ObjectMapper om = new ObjectMapper();
 	private EmployeeService employeeService = new EmployeeService();
+	private AuthorizationService authService = new AuthorizationService();
 
 	public void process(HttpServletRequest req, HttpServletResponse resp, String[] portions)
 		throws ServletException, IOException {
@@ -51,6 +53,20 @@ public class EmployeeController {
 				List<Employee> all = employeeService.findAll();
 				ResponseUtil.writeJSON(resp, all);
 				return;
+			}
+			
+			
+			if(method.equals("POST")) {
+				authService.guard(req, new Role(2, "Finance Manager"));
+				String body = RequestUtil.readBody(req);
+				
+				Employee e = om.readValue(body, Employee.class);
+				// Jackson Databind ObjectMapper uses reflection to
+				// verify that variable names match the keys of the JSON
+				// and that the types of the inputs match the types on the class
+				
+				e = employeeService.insert(e);
+				ResponseUtil.writeJSON(resp, e);
 			}
 		}
 	}

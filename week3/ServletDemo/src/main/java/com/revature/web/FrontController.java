@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.controllers.EmployeeController;
+import com.revature.exceptions.authorization.AuthorizationException;
 
 @WebServlet(urlPatterns = {"/rest/*"})
 // Normally, I would use just /* However, this create a url-pattern clash
@@ -51,38 +52,41 @@ public class FrontController extends HttpServlet {
 			return;
 		}
 		
-		switch(resource) {
-		case "employees":
-			// I could put all logic here
-			// But could make switch statement very long
+		try {
+			switch(resource) {
+			case "employees":
+				// I could put all logic here
+				// But could make switch statement very long
+				
+				// Instead, Delegate to another helper
+				employeeController.process(req, resp, portions);
+				
+				break;
+			case "reimbursements":
+				break;
+			default:
+				resp.setStatus(400); // Bad Request
+				return;
+			}
+		} catch(AuthorizationException e) {
+			resp.setStatus(401);
+		} catch(/* Other custom exceptions */ RuntimeException e) {
 			
-			// Instead, Delegate to another helper
-			employeeController.process(req, resp, portions);
-			
-			break;
-		case "reimbursements":
-			break;
-		default:
-			resp.setStatus(400); // Bad Request
-			return;
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPost(req, resp);
+		doGet(req, resp);
 	}
 
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doPut(req, resp);
+		doGet(req, resp);
 	}
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doDelete(req, resp);
+		doGet(req, resp);
 	}
 }
