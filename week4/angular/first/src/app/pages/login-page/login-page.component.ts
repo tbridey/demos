@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http'
+import { Router } from '@angular/router';
 
 /*
  * Angular uses the TypeScript's decorators
@@ -57,7 +59,19 @@ export class LoginPageComponent implements OnInit {
   public username: string = "";
   public password: string = "";
 
-  constructor() { }
+  /**
+   * Angular will perform Dependency Injection
+   *
+   * This means that Angular will automatically instantiate
+   * an instance of my parameter, and inject it into the constructor
+   * when this Component is being created
+   *
+   * We no longer need to invoke the constructor of our parameters
+   * manually.
+   *
+   * It is all performed behind the scenes for us.
+   */
+  constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -90,13 +104,37 @@ export class LoginPageComponent implements OnInit {
   async sendLogin(): Promise<void> {
     try {
       // Fetch statement can also be refactored
-      let response = await fetch("http://localhost:8080/ServletDemo/login?" +
-        "username=" + this.username + "&password=" + this.password);
+      // let response = await fetch("http://localhost:8080/ServletDemo/login?" +
+      //   "username=" + this.username + "&password=" + this.password);
 
-      sessionStorage.setItem("currentUser", await response.json());
+      // sessionStorage.setItem("currentUser", await response.json());
+
+      // let responseObservable = this.http.get<string>('http://localhost:8080/ServletDemo/login', {
+      //   params: {
+      //     username: this.username,
+      //     password: this.password
+      //   }
+      // });
+
+      // responseObservable.subscribe( (str) => {
+      //   sessionStorage.setItem("currentUser", str);
+      // });
+
+      let username = await this.http.get<string>('http://localhost:8080/ServletDemo/login', {
+        params: {
+          username: this.username,
+          password: this.password
+        }
+      }).toPromise();
+
+      sessionStorage.setItem("currentUser", username);
+
+      // responseObservable.
+
       // Navigate to home page
       // Refactor later
-      window.location.href = environment.baseUrl + "home";
+      // window.location.href = environment.baseUrl + "home";
+      this.router.navigateByUrl("/home");
     } catch(error) {
       // Failed to login
       console.log(error);

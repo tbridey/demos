@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -9,14 +10,20 @@ export class HomePageComponent implements OnInit {
 
   public currentUser: any = undefined;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.currentUser = sessionStorage.getItem("currentUser");
   }
 
-  goback(): void {
+  logout(): void {
     // Also needs to be refactored
-    window.history.back();
+    sessionStorage.removeItem("currentUser");
+    // Effectively log out the User
+    // Navigate back to login page
+    this.router.navigateByUrl("/login");
+
+    // this.router.navigate(['/home', 5]);
+    // The navigate method allows us to inject Path Variables
   }
 }
