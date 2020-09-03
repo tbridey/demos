@@ -1,0 +1,212 @@
+# Week 1 Study Guide
+Topics Covered: Angular & Selenium
+
+Review the material covered from the week, which is listed out below.
+
+Leverage the "How to do well in QC" Document that is pinned to the Training channel on Slack.
+
+In particular, be able to answer "Tell me about your experience with X?", where X is any of the topics listed below.
+
+Be able to provide overall reasons `Why` certain features are available. Such as what problems they solve.
+
+## Topics
+- Node
+  - Runtime Environment for JavaScript external to the browser
+  - It allows you to run JavaScript "directly" without needing a browser
+- NPM
+  - Node Package Manager
+  - General Package Manager, specific to Node Packages
+  - We installed Angular with npm
+- Angular
+  - Uses TypeScript
+    - A SuperSet of JavaScript
+      - All JavaScript is also valid TypeScript
+    - Has optional type safety/strong typing
+      - syntax: `let myVar: type = value`
+        - e.g.: `let username: string = "username"`
+    - Types
+      - all JS types
+      - `any`
+        - Type to use JS's dynamic typing functionality
+      - `void`
+        - Standard return type that means no return
+      - `never`
+        - Interesting return type that means the function will never complete
+          - Only valid with functions that have something like an infinite while-loop
+    - Has many type related features
+      - Interfaces
+      - Generics
+    - Access Modifiers
+      - public
+      - private
+      - protected
+      - There is NO default access
+        - The lack of a modifier -> public access
+    - Has Decorators
+      - Similar to Annotations in Java
+  - Angular CLI
+    - Command Line Interface
+    - `ng new` to create a new Angular Project
+    - `ng generate` to generate files based off of miscellaneous schematics
+      - `ng generate component myComponent`
+      - `ng generate service employeeService`
+      - etc
+    - `ng serve`
+      - Creates a development server to host Angular project at `localhost:4200`
+  - Primary Schematics/Structures of Angular
+    - Modules
+      - Used `@NgModule` decorator
+      - Is a high level organizational structure
+      - Contains services and components
+      - Has some useful lazy-loading features
+    - Services
+      - Represent isolated, independent logic, that is not tied to a view
+      - Uses the `@Injectible` decorator
+      - Can be "injected" into a component through Angular's Dependency Injection (DI) system
+        - Just have the service as a parameter in the constructor of a component
+      - Often useful to contain a variety of needed HTTP Requests organized within services
+        - Then the components can just use the methods on the service
+      - They can also be used in a way to cache data and pass it around between components
+    - Components
+      - Represent a "portion" or "section" of a webpage
+      - Has 3 files: `.ts`, `.html`, and `.css`
+      - The `.html` and `.css` form the "view"
+      - The .`ts` file controls the logic of the view
+      - Components can be nested within other components
+        - Creating a large-scale HAS-A structure of components
+      - Uses the `@Component` decorator
+  - Minor schematics
+    - Pipes
+      - Useful structures to transform data into other data
+      - Very versatile, but most commonly used to transform strings
+      - Can be used to filter input data
+        - However, performance-wise, this can be very impactful
+        - Be VERY careful about how much data you hand to a pipe that will filter data
+        - Perhaps 20 or so maximum
+    - Directives
+      - Can create custom directives
+      - But there are many built in directives
+  - Built in Directives
+    - Structural Directives
+      - Prefixed with an asterisk *
+      - *ngFor
+      - *ngIf
+      - ngSwitch (no asterisk, uses property binding)
+        - *nSwitchCase
+        - *ngDefaultCase
+    - Attribute Directives
+      - ngClass
+      - ngStyle
+    - Component Directive
+      - Components are technically a directive
+  - Databinding
+    - A means to bind data back and forth between `.ts` and `.html`
+    - String Interpolation
+      - Uses `{{ }}` syntax
+        - `<p>{{ username }}</p>`
+      - Used to bind information from `.ts` -> `.html` innerHTML content
+    - Property/Attribute Binding
+      - Uses `[]` syntax
+        - `[href]="url"`
+      - Used to bind information from `.ts` -> `.html` element attributes
+    - Event Binding
+      - Uses `()` syntax
+        - `(click)="onclick()"`
+      - Used to trigger functions in `.ts` in response to events from `.html`
+    - Two-Way Databinding
+      - Doesn't really have a name, but could refer to it as ngModel
+      - Uses `[(ngModel)]` syntax
+      - Require the `FormsModule` to be imported
+      - Specifically works with `input` tags
+      - Binds data from `.html` input tag to `.ts` variable and back to `.html` elements
+  - Routing System
+    - Because Angular creates "Single Page Applications" or SPAs
+    - The router helps simulate multiple webpages, when in fact, there is only 1
+    - It allows us to bind components to be displayed in response to a `router-outlet` tag
+    - You can customize the paths that Router leverages
+      - And these routes can be configured across multiple Modules
+  - Angular's Version History
+    - AngularJS, which was built using JavaScript
+    - Angular, which was built using TypeScript
+      - Often referred to as Angular 2.0 or just Angular 2
+      - But it's not perfect, because AngularJS also had a version 2
+    - We have to be very careful about how we refer to Angular
+  - RxJs Observables
+    - Similar to Promises, however, they can receive multiple values
+      - Promises can only receive one
+    - Observables can be cancelled, Promises cannot
+    - There are small differences
+    - Overall, they are quite similar
+      - Can even convert Observables into Promises with `.toPromise()`
+    - Observables allow for multiple "listeners" on the same "data stream"
+      - Can be quite powerful when leveraged
+  - HttpClientModule & HttpClient Service
+    - Built to send HTTP Requests using Obervables
+    - The HttpClient Service requires the `HttpClientModule` to be imported
+    - Can be injected anywhere you need
+      - Either directly in a component
+      - Or in another service that you create
+    - RxJs Subjects
+      - An expansion on the idea of Observables
+      - Allow for multiple inputs to the "data stream"
+      - Creates an overall Publisher/Subscriber architecture
+        - Which is a very useful Design Pattern in technology, even disregarding Angular
+        - Often abbreviated as "PubSub"
+- Selenium
+  - It is a tool to automate/control the browser
+  - There is Selenium WebDriver, Selenium Grid, and Selenium IDE
+    - We will ONLY use Selenium WebDriver
+    - IDE can be useful, but often uses xpath, which is very sensitive to change
+      - So scripts created with IDE often break shortly thereafter
+  - We use Selenium in the context of testing web applications
+    - We create e2e tests (end to end tests)
+    - They are designed to test a web application from end to end
+      - Frontend to Backend
+    - They are a form of integration or system test
+      - The category depends on the scale of the test and application
+    - Our goal is to verify that our web application functions and behaves "as expected"
+  - We leverage a Page Object Model Design Pattern
+    - We create classes to represent a single webpage
+    - With fields of corresponding important elements on the page
+    - With methods to interact with the elements
+  - Selenium uses a browser-specific driver
+    - ChromeDriver
+    - GeckoDriver (FireFox)
+    - SafariDriver
+    - etc
+  - The Selenium API in java comes from the `selenium-java` package from Maven
+  - Implicit vs Explicit waits
+    - Implicit waits will wait "up to" a certain amount of time before operations are available
+      - Such as an element being clickable
+      - Applies universally
+    - Explicit waits will wait as long as you say, or until a very specific operation is available
+      - Applies to specific scenarios
+    - Technically also Fluid Waits
+      - Explore on your own
+  - API
+    - WebDriver
+      - chromedriver, etc
+    - WebElement
+      - Similar to HTMLElement in JavaScript
+    - ExpectedConditions
+      - In regards to explicit waits
+- SDLC
+  - Software Development LifeCycle
+    - 6 phases
+  - Review [here](./notes/SDLC.md)
+  - Of particular note
+    - Agile Practices (AKA DevOps Practices)
+      - CI/CD or CI/CD/CD
+      - Continuous Integration
+      - Continuous Delivery
+      - Continuous Deployment
+    - Remember what they are, their names, and their order
+      - People often misremember CD as "Continuous Development"
+      - But this *does not exist*
+  - Waterfall vs Agile
+    - What are they?
+    - How do they differ?
+  - Agile Scrum details
+    - Artifacts
+    - Meetings
+    - Roles

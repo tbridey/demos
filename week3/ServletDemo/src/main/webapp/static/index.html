@@ -15,10 +15,10 @@
 		<!-- When you submit requests like this, you're not in JavaScript to process the response -->
 		<!-- So this is better used when you expect to get HTML in response -->
 		<!-- action="http://localhost:8080/ServletDemo/login" method="GET" -->
-		<form>
+		<form onsubmit="return false;">
 			<input id="username" type="text" name="username">
 			<input id="password" type="password" name="password">
-			<button type="submit" onclick="sendLogin()">SEND</button>
+			<button onclick="sendLogin()">SEND</button>
 		</form>
 
 		<script>
@@ -30,15 +30,21 @@
 				console.log(data);
 			}
 
-			async function sendLogin() {
+			async function sendLogin(e) {
 				let usernameInput = document.getElementById("username");
 				let passwordInput = document.getElementById("password");
 
 				try {
-					let response = await fetch("http://localhost:8080/ServletDemo/login?" +
-					"username=" + usernameInput.value + "&password=" + passwordInput.value);
+					let response = await fetch("http://localhost:8080/ServletDemo/login", {
+						method: 'POST',
+						credentials: 'include',
+						body: JSON.stringify({
+							username: usernameInput.value,
+							password: passwordInput.value
+						})
+					});
 
-					sessionStorage.setItem("currentUser", await response.json());
+					sessionStorage.setItem("currentUser", JSON.stringify(await response.json()));
 					// Navigate to profile page
 					window.location.href = "http://localhost:8080/ServletDemo/profile";
 				} catch(error) {
@@ -48,7 +54,7 @@
 				}
 			}
 
-			func();
+			//func();
 		</script>
 	</body>
 </html>

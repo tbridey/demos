@@ -2,16 +2,15 @@ package com.revature.models;
 
 import java.util.Objects;
 
-public class Role {
-
+public class RType {
 	private int id;
 	private String name;
 	
-	public Role() {
+	public RType() {
 		super();
 	}
 
-	public Role(int id, String name) {
+	public RType(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -43,15 +42,15 @@ public class Role {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Role)) {
+		if (!(obj instanceof RType)) {
 			return false;
 		}
-		Role other = (Role) obj;
+		RType other = (RType) obj;
 		return id == other.id && Objects.equals(name, other.name);
 	}
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + "]";
+		return "RStatus [id=" + id + ", name=" + name + "]";
 	}
 }

@@ -3,21 +3,25 @@ package com.revature.models;
 import java.util.Objects;
 
 public class Employee {
-
+	
 	private int id;
 	private String firstName;
 	private String lastName;
+	private String username;
+	private String password;
 	private Role role;
 	
 	public Employee() {
 		super();
 	}
 
-	public Employee(int id, String firstName, String lastName, Role role) {
+	public Employee(int id, String firstName, String lastName, String username, String password, Role role) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
 		this.role = role;
 	}
 
@@ -45,6 +49,22 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public Role getRole() {
 		return role;
 	}
@@ -55,7 +75,7 @@ public class Employee {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(firstName, id, lastName, role);
+		return Objects.hash(firstName, id, lastName, password, role, username);
 	}
 
 	@Override
@@ -68,11 +88,13 @@ public class Employee {
 		}
 		Employee other = (Employee) obj;
 		return Objects.equals(firstName, other.firstName) && id == other.id && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(role, other.role);
+				&& Objects.equals(password, other.password) && Objects.equals(role, other.role)
+				&& Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", role=" + role + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", role=" + role + "]";
 	}
 }

@@ -43,7 +43,7 @@ public class MySecondServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Employee e = new Employee(1, "John", "Smith", new Role(1, "Finance Manager"));
+		Employee e = new Employee(1, "John", "Smith", "johnsmith", "pass", new Role(1, "Finance Manager"));
 		
 		PrintWriter writer = response.getWriter();
 		

@@ -60,7 +60,7 @@ public class AuthorizationServiceTest {
 		when(mockRequest1.getSession()).thenReturn(mockSessionFinanceManager);
 		
 		when(mockSessionFinanceManager.getAttribute("currentUser")).thenReturn(
-					new Employee(1, "Matthew", "Oberlies", 
+					new Employee(1, "Matthew", "Oberlies", "moberlies", "pass", 
 					new Role(1, "Finance Manager")));
 		
 		when(mockRequest2.getSession(anyBoolean())).thenReturn(null);

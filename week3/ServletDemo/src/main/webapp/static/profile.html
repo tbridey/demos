@@ -4,26 +4,34 @@
 		<title>My Webpage from a Servlet</title>
 		<meta charset="UTF-8">
 	</head>
-	<body>
-		<h1 id="welcome">Welcome</h1>
+	<body onload="grabUser()">
+		<h1 id="welcome">Loading...</h1>
 
-		<button onclick="goback()">Go Back</button>
+		<form action="/ServletDemo/logout" method="POST">
+			<button type="submit" onclick="clearSession()">Logout</button>
+		</form>
 		<script>
-			function goback() {
-				window.history.back();
+			function guard() {
+				let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+				
+				if(!currentUser) {
+					window.location.href="http://localhost:8080/ServletDemo";
+				}
 			}
+			guard();
+		
+			function grabUser() {
+				// Retrieving information from the session
+				let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
-			// Retrieving information from the session
-			let currentUser = sessionStorage.getItem("currentUser");
+				let welcome = document.getElementById("welcome");
 
-			// If they are not logged in, goback immediately
-			if(!currentUser) {
-				goback();
+				welcome.innerHTML = "Welcome " + currentUser.firstName + " " + currentUser.lastName;
 			}
-
-			let welcome = document.getElementById("welcome");
-
-			welcome.innerHTML += " " + currentUser;
+			
+			function clearSession() {
+				sessionStorage.removeItem("currentUser");
+			}
 		</script>
 
 	</body>
