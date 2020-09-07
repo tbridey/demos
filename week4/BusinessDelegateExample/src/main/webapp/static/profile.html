@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My Webpage from a Servlet</title>
+		<meta charset="UTF-8">
+	</head>
+	<body onload="grabUser()">
+		<h1 id="welcome">Loading...</h1>
+
+		<form action="/BusinessDelegateExample/logout" method="POST">
+			<button type="submit" onclick="clearSession()">Logout</button>
+		</form>
+		<script>
+			function guard() {
+				let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+				
+				if(!currentUser) {
+					window.location.href="http://localhost:8080/BusinessDelegateExample";
+				}
+			}
+			guard();
+		
+			function grabUser() {
+				// Retrieving information from the session
+				let currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+
+				let welcome = document.getElementById("welcome");
+
+				welcome.innerHTML = "Welcome " + currentUser.firstName + " " + currentUser.lastName;
+			}
+			
+			function clearSession() {
+				sessionStorage.removeItem("currentUser");
+			}
+		</script>
+
+	</body>
+</html>

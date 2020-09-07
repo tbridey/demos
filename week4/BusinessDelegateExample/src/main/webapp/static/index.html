@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>My Webpage from a Servlet</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<h1>My custom webpage</h1>
+		<p>This was sent back as a full html file from our Servlet</p>
+		<script>
+			console.log("Hello there in the console!");
+		</script>
+
+		<!-- When you submit requests like this, you're not in JavaScript to process the response -->
+		<!-- So this is better used when you expect to get HTML in response -->
+		<!-- action="http://localhost:8080/BusinessDelegateExample/login" method="GET" -->
+		<form onsubmit="return false;">
+			<input id="username" type="text" name="username">
+			<input id="password" type="password" name="password">
+			<button onclick="sendLogin()">SEND</button>
+		</form>
+
+		<script>
+			async function sendLogin(e) {
+				let usernameInput = document.getElementById("username");
+				let passwordInput = document.getElementById("password");
+
+				try {
+					let response = await fetch("http://localhost:8080/BusinessDelegateExample/login", {
+						method: 'POST',
+						credentials: 'include',
+						body: JSON.stringify({
+							username: usernameInput.value,
+							password: passwordInput.value
+						})
+					});
+
+					sessionStorage.setItem("currentUser", JSON.stringify(await response.json()));
+					// Navigate to profile page
+					window.location.href = "http://localhost:8080/BusinessDelegateExample/profile";
+				} catch(error) {
+					// Failed to login
+					console.log(error);
+					alert("Failed to login");
+				}
+			}
+		</script>
+	</body>
+</html>
