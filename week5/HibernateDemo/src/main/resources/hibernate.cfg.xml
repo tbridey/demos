@@ -27,5 +27,10 @@
 		<mapping class="com.revature.models.Match"/>
 		<mapping class="com.revature.models.Side"/>
 		<mapping class="com.revature.models.Video"/>
+		<mapping class="com.revature.models.Trainer"/>
+		
+		<!-- This indicates that there is a file with this name that will be mapping a class through xml -->
+		<mapping resource="Pokemon.hbm.xml"/>
+		<mapping resource="named-queries.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

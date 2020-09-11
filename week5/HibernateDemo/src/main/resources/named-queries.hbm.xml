@@ -1,0 +1,10 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        
+<hibernate-mapping>
+	<query name="get_trainer_with_pokemon">
+		<!-- The below CDATA type is an XML specific type, to prevent it from parsing < and > symbols -->
+		<![CDATA[SELECT DISTINCT t FROM Trainer t INNER JOIN t.party pokemon WHERE pokemon.name = :name]]>
+	</query>
+</hibernate-mapping>

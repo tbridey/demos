@@ -3,7 +3,7 @@ package com.revature;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,7 +12,9 @@ import org.hibernate.Transaction;
 
 import com.revature.models.Competition;
 import com.revature.models.Match;
+import com.revature.models.Pokemon;
 import com.revature.models.Side;
+import com.revature.models.Trainer;
 import com.revature.models.Video;
 import com.revature.repositories.IMatchDAO;
 import com.revature.repositories.MatchDAO;
@@ -92,5 +94,47 @@ public class Driver {
 		dao.delete(m);
 		
 		System.out.println(dao.findAll());
+		
+		s = HibernateUtil.getSession();
+		tx = s.beginTransaction();
+		
+		Trainer t = new Trainer(0, "Ash Ketchum", new HashSet<>());
+		s.save(t);
+		
+		
+		Pokemon p = new Pokemon(0, "Pikachu", "Electric", t);
+		s.save(p);
+
+		tx.commit();
+		
+		HibernateUtil.closeSession();
+		
+		s = HibernateUtil.getSession();
+		
+		System.out.println(s.get(Trainer.class, t.getId()).getParty());
+		
+		List<Trainer> result1 = s.createNamedQuery("getAll", Trainer.class).getResultList();
+		
+		System.out.println(result1);
+		
+		List<Pokemon> result2 = s.createNamedQuery("getByType", Pokemon.class)
+					.setParameter("type", "Electric")
+					.getResultList();
+		
+		System.out.println(result2);
+		
+		System.out.println(result2.get(0).getTrainer());
+		
+		List<Trainer> result3 = s.createNamedQuery("get_trainer_with_pokemon", Trainer.class)
+					.setParameter("name", "Pikachu")
+					.getResultList();
+		
+		System.out.println(result3);
+		
+		List<Trainer> result4 = s.createNamedQuery("get_trainer_with_pokemon", Trainer.class)
+				.setParameter("name", "Bulbasaur")
+				.getResultList();
+	
+		System.out.println(result4);
 	}
 }
