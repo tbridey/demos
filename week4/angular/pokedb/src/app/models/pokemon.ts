@@ -1,4 +1,6 @@
-export class Pokemon {
+import Identifable from './identifiable';
+
+export class Pokemon implements Identifable {
   public id: number;
   public name: string;
   public height: number;
