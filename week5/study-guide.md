@@ -1,0 +1,133 @@
+# Week 5 Study Guide
+Topics Covered: DevOps and Hibernate (also Sonar, Unix, and AWS)
+
+Review the material covered from the week, which is listed out below.
+
+Leverage the "How to do well in QC" Document that is pinned to the Training channel on Slack.
+
+In particular, be able to answer "Tell me about your experience with X?", where X is any of the topics listed below.
+
+Be able to provide overall reasons `Why` certain features are available. Such as what problems they solve.
+
+## Topics
+- [AWS](notes/aws.md)
+  - Amazon Web Services
+  - Cloud Platform for a variety of different services
+  - Cloud Models
+    - Software as a Service
+    - Platform as a Service
+    - Infrastructure as a Service
+    - There technically more categories, but these are 3 primary ones
+  - Software Infrastructure Components
+  - Common AWS Services
+    - RDS = Relational Database Service
+    - EC2 = Elastic Compute Cloud
+    - S3 = Simple Storage Service
+    - EBS = Elastic Block Storage
+    - ELB = Elastic Load Balancer
+    - AMI = Amazon Machine Images
+    - IAM = Identity & Access Management
+    - Route 53
+    - Security Groups
+  - Pay as you go Model
+  - The concept of autoscaling is very important
+    - Vertical Scaling
+    - Horizontal Scaling
+    - The history behind them
+- Unix/Linux
+  - Filesystem is different from windows
+  - There is a parent/root folder called "/"
+    - Home folders are /home/username
+  - Linux Commands
+    - man
+    - sudo
+    - cd
+    - ls
+    - grep
+    - chmod
+    - touch
+    - mkdir
+    - yum
+    - usermod
+    - chgrp
+    - groupadd
+    - cat
+    - rm
+    - mkdir
+- [Sonar](notes/sonar.md)
+  - Family of software that focuses on analyzing code quality
+  - SonarLint
+    - A Linter
+  - SonarCloud
+    - A cloud dashboard for analyzing code quality of projects
+    - [SonarCloud.io](http://www.sonarcloud.io)
+  - SonarQube
+    - A private Server that runs the same software as SonarCloud
+    - It's just private to your own company/projects
+- DevOps
+  - 3 DevOps Practices
+    - Continuous Integration
+    - Continious Delivery
+    - Continuous Deployment
+    - Remember the above names(There is NO "Continuous Development")
+  - Concept of a [Pipeline](notes/pipeline.md)
+    - Automating the steps for deployment
+  - There are a variety of "CI tools" to create pipelines for different purposes
+    - Not every pipeline needs to automate every step
+    - And there are some small pipelines to do very specific actions
+    - Jenkins
+    - GitHub Actions
+    - AWS CodeBuild/CodeRun
+    - Travis CI
+    - Circle CI
+    - and more
+  - Remember the steps to set up a Jenkins Pipeline
+    - As well as SonarCloud analysis with GitHub Actions
+    - There is a recording if you need to review
+- [Hibernate](notes/hibernate.md)
+  - ORM = Object Relational Mapper
+  - Allows us to perform SQL Operations in an Object Oriented Way
+  - Hibernate API
+    - Configuration Class
+      - Represents configuration for the `hibernate.cfg.xml` file
+    - SessionFactory Interface
+    - Session Interface
+      - get
+      - load
+      - persist
+      - save
+      - merge
+      - update
+      - delete
+    - Transaction Interface
+      - commit
+      - rollback
+  - Ways to perform Queries
+    - Criteria Query API
+    - HQL = Hibernate Query Language
+      - JPQL = Java Persistence Query Language
+      - Similar to HQL, but technically different
+        - Associated with the JPA standard
+    - NativeSQL Queries
+  - Caches
+    - L1 cache
+      - Provided
+      - Session-Scoped cache
+    - L2 cache
+      - Not Provided
+      - SessionFactory-Scoped cache
+  - Object States
+    - TRANSIENT
+    - PERSISTENT
+    - DETACHED
+  - We can configurate the mappings in 2 ways
+    - XML Configuration
+      - `hibernate.cfg.xml`
+      - `Name.hbm.xml`
+    - JPA Annotations
+      - JPA = Java Persistence API
+      - Standard for ORMs that Hibernate follows/supports
+      - Be familiar with the annotations
+  - NamedQueries
+    - Can be configured in XML or with annotations
+  - Be familiar with how to implement a variety of DAOs with Hibernate

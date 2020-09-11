@@ -1,4 +1,4 @@
-# Week 1 Study Guide
+# Week 4 Study Guide
 Topics Covered: Angular & Selenium
 
 Review the material covered from the week, which is listed out below.

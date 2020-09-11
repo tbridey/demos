@@ -1,4 +1,4 @@
-# Week 1 Study Guide
+# Week 2 Study Guide
 Topics Covered: SQL (PostgreSQL)
 
 Review the material covered from the week, which is listed out below.

@@ -1,4 +1,4 @@
-# Week 1 Study Guide
+# Week 3 Study Guide
 Topics Covered: HTML, CSS, Bootstrap, JavaScript, Servlets
 
 Review the material covered from the week, which is listed out below.
