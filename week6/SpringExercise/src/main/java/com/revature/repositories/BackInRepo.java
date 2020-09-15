@@ -1,9 +1,10 @@
 package com.revature.repositories;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class BackInRepo implements IBackInRepo {
 
-	
-	
 	public BackInRepo() {
 		super();
 	}
