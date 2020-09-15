@@ -1,8 +1,9 @@
 package com.revature;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.revature.config.Config;
 import com.revature.services.InnerService;
 import com.revature.services.OuterService;
 
@@ -14,8 +15,8 @@ public class Driver {
 
 	private static String DoesItWork() {
 		
-		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
-		//ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+//		ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext ac = new AnnotationConfigApplicationContext(Config.class);
 		
 		InnerService inServ = ac.getBean(InnerService.class);
 		OuterService outServ = ac.getBean(OuterService.class);

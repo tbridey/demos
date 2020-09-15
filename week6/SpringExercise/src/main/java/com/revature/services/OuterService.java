@@ -1,11 +1,18 @@
 package com.revature.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.revature.repositories.IBackOutRepo;
 import com.revature.repositories.IFrontOutRepo;
 
+@Service
 public class OuterService {
 	
+	@Autowired
 	private IFrontOutRepo fRepo;
+	
+	@Autowired
 	private IBackOutRepo bRepo;
 	
 	public OuterService() {

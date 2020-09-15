@@ -1,11 +1,18 @@
 package com.revature.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.revature.repositories.IBackInRepo;
 import com.revature.repositories.IFrontInRepo;
 
+@Service
 public class InnerService {
 	
+	@Autowired
 	private IFrontInRepo fRepo;
+	
+	@Autowired
 	private IBackInRepo bRepo;
 	
 	public InnerService() {
