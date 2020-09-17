@@ -46,9 +46,10 @@ public class Driver {
 		
 		Random r = new Random();
 		for(int i = 0; i < 10000; i++) {
-			car.setId(r.nextInt(10000));
+//			car.setId(r.nextInt(10000));
+			car.validate();
 		}
 		
-		System.out.println(TimingAspect.getTotalDurations().get("void com.revature.models.Car.setId(int)") / 10_000_000 + " us");
+		System.out.println(TimingAspect.getTotalDurations().get("void com.revature.models.Car.validate()") / 10_000_000 + " us");
 	}
 }

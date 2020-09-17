@@ -21,7 +21,7 @@ public class TimingAspect {
 	 * My goal is to write some advice to time how long every method takes to execute
 	 */
 	
-	@Around("within(com.revature.models.*)")
+	@Around("@annotation(com.revature.annotations.Timed)")
 	public Object timeAllMethods(ProceedingJoinPoint pjp) throws Throwable {
 		long startTime = System.nanoTime();
 		

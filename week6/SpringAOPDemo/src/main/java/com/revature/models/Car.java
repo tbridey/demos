@@ -2,6 +2,7 @@ package com.revature.models;
 
 import org.springframework.stereotype.Component;
 
+import com.revature.annotations.Timed;
 import com.revature.exceptions.InvalidCarException;
 
 import lombok.Data;
@@ -17,8 +18,8 @@ public class Car {
 	private int year;
 	private String engine;
 	
+	@Timed
 	public void validate() {
-		
 		switch(this.model.toLowerCase()) {
 		case "mustang":
 			if(this.year < 2000) {
