@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.exceptions.UserNotFoundException;
 import com.revature.models.User;
 import com.revature.repositories.UserRepository;
 
@@ -44,7 +45,8 @@ public class UserController {
 		User u = dao.findByUsername(username);
 		
 		if(u == null) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			throw new UserNotFoundException(username);
 		}
 		
 		return ResponseEntity.ok(u);
@@ -65,7 +67,8 @@ public class UserController {
 		List<User> list = dao.findByFirstName(firstname);
 		
 		if(list.isEmpty()) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			throw new UserNotFoundException();
 		}
 		
 		return ResponseEntity.ok(list);
@@ -76,7 +79,8 @@ public class UserController {
 		List<User> list = dao.findByFirstNameStartsWith(firstname);
 		
 		if(list.isEmpty()) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			throw new UserNotFoundException();
 		}
 		
 		return ResponseEntity.ok(list);
@@ -87,7 +91,8 @@ public class UserController {
 		List<User> list = dao.findByFirstNameEndsWith(firstname);
 		
 		if(list.isEmpty()) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			throw new UserNotFoundException();
 		}
 		
 		return ResponseEntity.ok(list);
@@ -98,7 +103,8 @@ public class UserController {
 		List<User> list = dao.findByFirstNameContains(firstname);
 		
 		if(list.isEmpty()) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			throw new UserNotFoundException();
 		}
 		
 		return ResponseEntity.ok(list);
@@ -109,7 +115,8 @@ public class UserController {
 		List<User> list = dao.findByEmailContains(email);
 		
 		if(list.isEmpty()) {
-			return ResponseEntity.noContent().build();
+//			return ResponseEntity.noContent().build();
+			throw new UserNotFoundException();
 		}
 		
 		return ResponseEntity.ok(list);

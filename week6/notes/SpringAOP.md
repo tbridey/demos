@@ -65,3 +65,5 @@
   - Limit matching to JPs where the target object is being proxied
 - `args`
   - Limit matching to JPs where arguments are instances of the given types
+- `@annotation`
+  - Limit matching to JPs where the method is annotated by the given annotation
