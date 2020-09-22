@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Component
 @Entity
@@ -31,6 +35,7 @@ public class Pokemon {
 	@Column
 	private int baseXP;
 	
+	@JsonBackReference("poke-trainer")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Trainer trainer;
@@ -98,14 +103,7 @@ public class Pokemon {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + baseXP;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + pokeId;
-		result = prime * result + pokedexId;
-		result = prime * result + ((trainer == null) ? 0 : trainer.hashCode());
-		return result;
+		return Objects.hash(baseXP, name, pokeId, pokedexId);
 	}
 
 	@Override
@@ -117,37 +115,12 @@ public class Pokemon {
 			return false;
 		}
 		Pokemon other = (Pokemon) obj;
-		if (baseXP != other.baseXP) {
-			return false;
-		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
-			return false;
-		}
-		if (pokeId != other.pokeId) {
-			return false;
-		}
-		if (pokedexId != other.pokedexId) {
-			return false;
-		}
-		if (trainer == null) {
-			if (other.trainer != null) {
-				return false;
-			}
-		} else if (!trainer.equals(other.trainer)) {
-			return false;
-		}
-		return true;
+		return baseXP == other.baseXP && Objects.equals(name, other.name) && pokeId == other.pokeId
+				&& pokedexId == other.pokedexId;
 	}
 
 	@Override
 	public String toString() {
-		return "Pokemon [pokeId=" + pokeId + ", pokedexId=" + pokedexId + ", name=" + name + ", baseXP=" + baseXP
-				+ ", trainer=" + trainer.gettId() + "]";
+		return "Pokemon [pokeId=" + pokeId + ", pokedexId=" + pokedexId + ", name=" + name + ", baseXP=" + baseXP + "]";
 	}
-	
-	
 }

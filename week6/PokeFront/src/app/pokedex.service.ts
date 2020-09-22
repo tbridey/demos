@@ -9,26 +9,28 @@ import { Pokemon } from './pokemon';
 })
 export class PokedexService {
 
+  private baseUrl: string = "http://localhost:8081/PokeSpring";
+
 
   constructor(private http:  HttpClient) { }
 
-  getAllTrainers() {
-  //  TODO
+  getAllTrainers(): Observable<Trainer[]> {
+    return this.http.get<Trainer[]>(this.baseUrl + "/trainers");
   }
 
-  getTrainer(id:number) {
-    // TODO
+  getTrainer(id: number): Observable<Trainer> {
+    return this.http.get<Trainer>(this.baseUrl + "/trainers/" + id);
   }
 
-  addTrainer(t:Trainer): Observable<Trainer[]> {
-    // TODO
+  addTrainer(t: Trainer): Observable<Trainer[]> {
+    return this.http.post<Trainer[]>(this.baseUrl + "/trainers", t);
   }
 
-  getPoke(id:number): Observable<any> {
-    //TODO - Goes to PokeAPI
+  getPoke(id: number): Observable<any> {
+    return this.http.get<any>("https://pokeapi.co/api/v2/pokemon/" + id);
   }
 
-  addPoke(p:Pokemon): Observable<Trainer[]> {
-    //TODO
+  addPoke(p: Pokemon): Observable<Trainer[]> {
+    return this.http.post<Trainer[]>(this.baseUrl + "/pokemon", p);
   }
 }

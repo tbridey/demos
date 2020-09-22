@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="suite1">
+	<test name="test1">
+		<classes>
+			<class name="com.revature.testng.MyFirstTestNG" />
+		</classes>
+	</test>
+	<test name="groupTest">
+		<groups>
+			<run>
+				<include name="group1" />
+			</run>
+		</groups>
+	</test>
+</suite>

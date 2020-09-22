@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Component
 @Entity
 @Table(name = "TRAINERS")
@@ -27,6 +29,7 @@ public class Trainer {
 	@Column
 	private String name;
 
+	@JsonManagedReference("poke-trainer")
 	@OneToMany(mappedBy = "trainer", fetch = FetchType.EAGER)
 	private List<Pokemon> party = new ArrayList<>();
 
