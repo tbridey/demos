@@ -40,6 +40,16 @@ public class MyFirstTestNG {
 	  System.out.println("TEST 3");
   }
   
+  @Test(dependsOnMethods = {"test3"})
+  public void dependsOn3() {
+	  System.out.println("DEPENDS ON TEST 3");
+  }
+  
+  @Test(dependsOnGroups = {"group1"})
+  public void dependsOnGroup1() {
+	  System.out.println("DEPENDS ON group1");
+  }
+  
   @BeforeMethod
   public void beforeMethod() {
 	  System.out.println("BEFORE METHOD");
