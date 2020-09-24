@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Employee;
@@ -49,8 +50,30 @@ public class EmployeeDAO implements IEmployeeDAO {
 
 	@Override
 	public List<Employee> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Employee> all = new ArrayList<>();
+
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM project1.ers_users";
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				all.add(new Employee(
+						rs.getInt("ers_users_id"),
+						rs.getString("user_first_name"),
+						rs.getString("user_last_name"),
+						rs.getString("ers_username"),
+						rs.getString("ers_password"),
+							rs.getInt("user_role_id") == 1 ? new Role(1, "Finance Manager") : new Role(2, "Employee") 
+						));
+			}
+		} catch(SQLException e) {
+			return null;
+		}
+		
+		return all;
 	}
 
 	@Override
