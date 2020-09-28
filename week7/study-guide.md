@@ -1,5 +1,5 @@
 # Week 7 Study Guide
-Topics Covered: Spring Framework & REST (Detailed)
+Topics Covered: Testing
 Review the material covered from the week, which is listed out below.
 
 Leverage the "How to do well in QC" Document that is pinned to the Training channel on Slack.
