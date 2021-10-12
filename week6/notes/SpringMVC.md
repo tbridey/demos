@@ -66,12 +66,12 @@ public class TestController {
 
 ## Control Flow
 0. Before any Request, the ContextLoadListener allows Tomcat to create the ApplicationContext (Spring Container)
-  - This has our important components listed above
+    - This has our important components listed above
 1. HTTP Request arrives at the `DispatcherServlet`
 2. `DispatcherServlet` consults the `HandlerMapping` to determine which Controller to delegate to
 3. Passes the relevant information to the Controller
-  - Depend upon the method parameters indicated with annotations
-  - Variety of other annotations to configure what data is passed over
+    - Depend upon the method parameters indicated with annotations
+    - Variety of other annotations to configure what data is passed over
 4. Controller will consult the business (or service) layer to process request
 5. Controller builds the response (Model and/or View)
 6. The response is handed back to the `DispatcherServlet`
