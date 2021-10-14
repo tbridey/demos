@@ -47,12 +47,12 @@ You do not return to any previous phase at any point
 - Agile is more of a mentality or a philosophy
   - It is not "a thing that you do", but more of a mindset or an approach to software development
 - Four core values to Agile (From Agile Manifesto)
-  1. Individuals and Interactions over processes and tools
-  2. Working software over comprehensive documentation
-    - We are not "abandoning documentation"
-    - Documentation is still incredibly important
-  3. Customer Collaboration over contract negotiation
-  4. Responding to change over following a plan
+      1. Individuals and Interactions over processes and tools
+      2. Working software over comprehensive documentation
+            - We are not "abandoning documentation"
+            - Documentation is still incredibly important
+      3. Customer Collaboration over contract negotiation
+      4. Responding to change over following a plan
 
 - There are Agile methods (often called frameworks), which are comprehensive approaches to the SDLC
   - "Scrum" is the most common Agile Framework
