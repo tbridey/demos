@@ -3,26 +3,26 @@ Process for planning, creating, testing, and displaying information systems.
 
 General Steps:
 1. Requirements Phase
-  - Existing system is evaluated so that the existing flaws can be determined
-  - Performed by Business Analysts (BAs)
+    - Existing system is evaluated so that the existing flaws can be determined
+    - Performed by Business Analysts (BAs)
 2. Analysis Phase
-  - The new system requirements are defined. In particular deficiencies are addressed with proposal for improvement
-  - BAs + Senior members of the team
+    - The new system requirements are defined. In particular deficiencies are addressed with proposal for improvement
+    - BAs + Senior members of the team
 3. Design Phase
-  - The proposed system is actually designed
-  - No coding is done yet, the product features are planned out
-  - Architects and Senior Devs
+    - The proposed system is actually designed
+    - No coding is done yet, the product features are planned out
+    - Architects and Senior Devs
 4. Development Phase
-  - Software is built
-  - Code for the product is actually written
-  - Junior & Senior Devs, etc
+    - Software is built
+    - Code for the product is actually written
+    - Junior & Senior Devs, etc
 5. Testing Phase
-  - Software is tested to ensure it functions as intended
-  - Devs & Testers
+    - Software is tested to ensure it functions as intended
+    - Devs & Testers
 6. Deployment and Maintenance Phase
-  - Product is delivered/deployed to the customer
-  - Maintenance is rigorously kept up
-  - Operations team
+    - Product is delivered/deployed to the customer
+    - Maintenance is rigorously kept up
+    - Operations team
 
 This is a high level description of what steps we take during the SDLC. However, the specific details will often vary, depending on the method you use to follow the SDLC.
 
