@@ -39,22 +39,22 @@ RDBMS = Relational DataBase Management System
 Constraint = Rules (or conditions) to follow for enforcing database table relationships
 
 1. Primary Key
-  - Data in this column is unique, not null
-  - Acts as the unique identifier for records in this table
-  - A composite key is just a Primary Key that consists of multiple columns together
+    - Data in this column is unique, not null
+    - Acts as the unique identifier for records in this table
+    - A composite key is just a Primary Key that consists of multiple columns together
 2. Foreign Key
-  - Data in this column references the primary key of another table
-  - Establishes relationships between 2 columns in the same table or different tables
+    - Data in this column references the primary key of another table
+    - Establishes relationships between 2 columns in the same table or different tables
 3. Unique
-  - Data in this column may not have duplicates
-  - May still have multiple null values
+    - Data in this column may not have duplicates
+    - May still have multiple null values
 4. Not Null
-  - Make sure that data in this column is not empty (null)
+    - Make sure that data in this column is not empty (null)
 5. Default
-  - Provide a default value in case a value was not already provided
+    - Provide a default value in case a value was not already provided
 6. Check
-  - Adds an extra condition (logical conditions) on data
-  - Such as age >= 18
+    - Adds an extra condition (logical conditions) on data
+    - Such as age >= 18
 
 ## Cardinality / Multiplicity
 
