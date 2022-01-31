@@ -139,14 +139,17 @@ A transaction would be used if you want to group multiple operations together an
 A. Atomicity
   - The operation occurs successfully or not at all
   - If it fails, the transaction will be aborted and changes will be rolled back
+ 
 C. Consistency
   - Ensure that the database properly changes state upon a successfully commit transaction
   - No transaction should have any adverse effect on the data residing in the database
     - Referential Integrity must be maintained
+ 
 I. Isolation
   - Enables transactions to operate independently of each other
   - Provides the ability to support parallel processing for performance benefits
   - Some issues could potentially arise due to this however
+  
 D. Durability
   - Ensures that the result or effect of a committed transaction persists in case of system failure
   - There is no delay between a transaction completing and the state being permanently persisted
